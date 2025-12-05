@@ -1,10 +1,13 @@
-## BASALT - Binning Across a Series of AssembLies Toolkit
-### Workflow of BASALT
+
+
+# 📣 New
+
+# 🌉 Workflow of BASALT
 
 <img src="fig/workflow.png" style="zoom: 75%;" />
 
 
-### Type of input data for BASALT
+# 📊 Type of input data for BASALT
 BASALT is a versatile tool with high efficiency for binning and post-binning refinement. BASALT can generate high quality metagenome-assembled genomes (MAGs) from various input data types including: 1) assembly from short-read sequences (SRS); 2) assembly from long-read sequences (LRS); [Note: only PacBio-HiFi data is supported in the current version for long-read only assemblies, other types of LRS data will be available in later versions.] 3) hybrid assembly from SRS + LRS. Specific features of BASALT are listed below:
 
 1.	Multiple assemblies as input with dereplication function
@@ -17,7 +20,7 @@ For any issue compiling and running BASALT, as well as bug report, please do not
 
 
 
-### SYSTEM REQUIREMENTS
+# 💻 SYSTEM REQUIREMENTS
 1.	Required dependencies
 
   	Linux x64 systems, 8+ cores, and 128GB+ RAM
@@ -42,7 +45,7 @@ For any issue compiling and running BASALT, as well as bug report, please do not
 
 
 
-### INSTALLATION
+# ⏬ INSTALLATION
 1.	Quick installation
    
   	Download BASALT_setup.py and run:
@@ -255,7 +258,7 @@ For any issue compiling and running BASALT, as well as bug report, please do not
 
 
 
-## Troubleshooting
+# 🙋 Troubleshooting
 1.	Error from SAMtools when installing BASALT:
    ```
    samtools: error while loading shared libraries: libcrypto.so1.0.0: cannot open shared object file: No such file or directory
@@ -336,7 +339,7 @@ FileNotFoundError: [Errno 2] No such file or directory: 'quality_report.tsv'
 
 
    
-### FAQ
+# 🤝 Community contributors —— FAQ
 1.	Q: Same contigs may be used multiple times in the single assembly + co-assembly mode. Does this strategy affect the final output?
    A: Redundant bins can be generated under single assembly + co-assembly mode when raw reads are used multiple times in the assembly step. For example, bin1 is clustered from single assembly A1, bin2 is clustered from co-assembly A1+A2+A3, where bin1 and bin2 are the same genome clustered with same contigs. This redundancy can be identified in the bin selection module, and redundant bins will be removed at this step. The final best binset is a non-redundant binset.
 
@@ -353,10 +356,11 @@ Note: A new version of BASALT (v1.0.2) will be released around late May 2024. We
 
   	A: No. BASALT will process and generate results under current working directory. We suggest users prepare a copy or generate soft links of raw reads and assembly files under the working directory to avoid error occurring.
 
+# 🔒 License
+* See [LICENSE](LICENSE) for details.
 
 
-
-### Citation
+# ✏️ Citation
 
 If you use this software in your research, please cite our paper:
 
@@ -374,9 +378,9 @@ Z Qiu, L Yuan, C Lian, B Lin, J Chen, R Mu, X Qiao, L Zhang, Z Xu, L Fan, Y Zhan
   publisher={Nature Publishing Group UK London}
 }
 ```
+# 
 
-
-### References
+# 📖 References
 
 > 1. Uritskiy, G.V., DiRuggiero, J. & Taylor, J. MetaWRAP—a flexible pipeline for genome-resolved metagenomic data analysis. Microbiome 6, 1-13 (2018).
 > 2. Sieber, C.M. et al. Recovery of genomes from metagenomes via a dereplication, aggregation and scoring strategy. Nature microbiology 3, 836-843 (2018).
