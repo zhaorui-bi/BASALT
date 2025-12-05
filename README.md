@@ -354,9 +354,26 @@ Note: A new version of BASALT (v1.0.2) will be released around late May 2024. We
   	A: No. BASALT will process and generate results under current working directory. We suggest users prepare a copy or generate soft links of raw reads and assembly files under the working directory to avoid error occurring.
 
 
-   
-### Cite our article
+
+
+### Citation
+
+If you use this software in your research, please cite our paper:
+
 Z Qiu, L Yuan, C Lian, B Lin, J Chen, R Mu, X Qiao, L Zhang, Z Xu, L Fan, Y Zhang, S Wang, J Li, H Cao, B Li, B Chen, C Song, Y Liu, L Shi, Y Tian, J Ni, T Zhang, J Zhou, W Zhuang, K Yu. BASALT refines binning from metagenomic data and increases resolution of genome-resolved metagenomic analysis. Nat. Commun. 2024, 15, 2179. https://doi.org/10.1038/s41467-024-46539-7
+
+```bibtex
+@article{qiu2024basalt,
+  title={BASALT refines binning from metagenomic data and increases resolution of genome-resolved metagenomic analysis},
+  author={Qiu, Zhiguang and Yuan, Li and Lian, Chun-Ang and Lin, Bin and Chen, Jie and Mu, Rong and Qiao, Xuejiao and Zhang, Liyu and Xu, Zheng and Fan, Lu and others},
+  journal={Nature communications},
+  volume={15},
+  number={1},
+  pages={2179},
+  year={2024},
+  publisher={Nature Publishing Group UK London}
+}
+
 
 
 
