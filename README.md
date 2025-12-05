@@ -1,4 +1,8 @@
 ## BASALT - Binning Across a Series of AssembLies Toolkit
+### Workflow of BASALT
+
+<img src="fig/workflow.png" style="zoom: 75%;" />
+
 
 ### Type of input data for BASALT
 BASALT is a versatile tool with high efficiency for binning and post-binning refinement. BASALT can generate high quality metagenome-assembled genomes (MAGs) from various input data types including: 1) assembly from short-read sequences (SRS); 2) assembly from long-read sequences (LRS); [Note: only PacBio-HiFi data is supported in the current version for long-read only assemblies, other types of LRS data will be available in later versions.] 3) hybrid assembly from SRS + LRS. Specific features of BASALT are listed below:
