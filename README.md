@@ -1,6 +1,11 @@
-# BASALT: a versatile tool with high efficiency for binning and post-binning refinement
+# BASALT: Binning Across a Series of Assemblies Toolkit
 
-## 📣 New
+## 📣 News
+
+* **[204/6/12]**:🤗 We release **BASALT V1.1.0** under MIT LICENSE.
+
+* **[2024/3/11]**:🤗 **BASALT refines binning from metagenomic data and increases resolution of genome-resolved metagenomic analysis** is publised by [Nature Communications](https://www.nature.com/articles/s41467-024-46539-7).
+
 
 ## 🌉 Workflow of BASALT
 
