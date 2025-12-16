@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from symbol import except_clause
+# from symbol import except_clause
 from Bio import SeqIO
 import sys, os, threading, copy, gc
 from multiprocessing import Pool

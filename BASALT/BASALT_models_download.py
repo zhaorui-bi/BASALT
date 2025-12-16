@@ -8,7 +8,8 @@ def download_model(local_dir=None):
         user_dir = os.path.expanduser('~')
         # url = "https://github.com/LinB203/test/releases/download/v1/pytorch_model.bin" 
         url = "https://figshare.com/ndownloader/files/41093033"
-        local_dir = f"{user_dir}/.cache"
+        # local_dir = f"{user_dir}/.cache"
+        local_dir = f"/scratch2/mz32/zhaorui/weight"
     local_path = f"{local_dir}/BASALT.zip"
 
     if os.path.exists(local_path):
@@ -33,7 +34,8 @@ def download_model(local_dir=None):
 if __name__ =='__main__':
     download_model()
     user_dir = os.path.expanduser('~')
-    destination_folder = f"{user_dir}/.cache"
+    # destination_folder = f"{user_dir}/.cache"
+    destination_folder = f"/scratch2/mz32/zhaorui/weight"
     source_file = destination_folder+"/BASALT.zip"
 
     # os.system unzip 

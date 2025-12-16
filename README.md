@@ -2,9 +2,17 @@
 
 ## 📣 News
 
-* **[2024/6/12]**:🤗 We release **BASALT V1.1.0** under MIT LICENSE.
+* **[2025/12/16]**:🤗 We release **BASALT V1.2.0** under MIT LICENSE.
 
-* **[2024/3/11]**:🤗 **BASALT refines binning from metagenomic data and increases resolution of genome-resolved metagenomic analysis** is publised on [Nature Communications](https://www.nature.com/articles/s41467-024-46539-7).
+> 1. Upgrade the python version from 3.8 to 3.12 with new friendly installation script
+> 2. Add LorBin [Nature Communications, 2025],  the current cutting-edged binning to BASALT Toolkit in Extra Binner
+> 3. Change the default QC evaluation software from CheckM to CheckM2 v1.1.0
+> 4. Support GPU acceleration for Semibin2 and Deep Learning Model in BASALT
+> 5. Weight for Deep Learning Model in BASALT can be set anywhere rather than in ~/.cahce by setting ~/.bashrc file
+
+* **[2024/06/12]**:🤗 We release **BASALT V1.1.0** under MIT LICENSE.
+
+* **[2024/03/11]**:🤗 **BASALT refines binning from metagenomic data and increases resolution of genome-resolved metagenomic analysis** is publised on [Nature Communications](https://www.nature.com/articles/s41467-024-46539-7).
 
 * **[2023/8/18]**:🤗 We release **BASALT V1.0.0** under MIT LICENSE.
 
@@ -52,6 +60,45 @@ For any issue compiling and running BASALT, as well as bug report, please do not
 
 
 ## ⏬ INSTALLATION
+1. BASALT 1.2.0 installation
+
+   Please refer to the installation guide of BASALT v1.2.0:
+   ```
+   git clone https://github.com/EMBL-PKU/BASALT.git
+
+   cd BASALT
+
+   conda create -n basalt_env -c conda-forge -c bioconda \     python=3.12 \     megahit metabat2 maxbin2 concoct prodigal semibin \     bedtools blast bowtie2 diamond checkm2 \     unicycler spades samtools racon pplacer pilon \     ncbi-vdb minimap2 miniasm idba hmmer entrez-direct \     biopython uv --yes
+
+   conda activate basalt_env
+
+   uv pip install tensorflow torch torchvision tensorboard tensorboardx \     lightgbm scikit-learn numpy scipy pandas matplotlib \     cython biolib joblib tqdm requests checkm-genome
+
+   ```
+   
+   Download BASALT script files and change permission:
+   ```
+   chmod +x install.sh
+
+   bash install.sh
+
+   chomod +x /path/to/basalt/bin/*
+
+   ```
+
+   Set environment variables by adding the following lines to your ~/.bashrc file:
+   ```
+   nano ~/.bashrc
+
+   export CHECKM2DB=/path/to/checkm2db/CheckM2_database/uniref100.KO.1.dmnd
+   export CHECKM_DATA_PATH=/path/to/checkmdb
+   export BASALT_WEIGHT=/path/to/BASALT
+
+   source ~/.bashrc
+   ```
+
+
+
 1.	Quick installation
    
   	Download BASALT_setup.py and run:

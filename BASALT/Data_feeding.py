@@ -239,7 +239,7 @@ def mapping(assembly, group, datasets, num_threads, pwd):
             with open(str(group)+'_DNA-'+str(i)+'_sorted.bam', 'r') as fh:
                 pass
         except FileNotFoundError:
-            print('Samtools sorting '+str(group)+'_DNA-'+str(i)+'.bam failed. Re-do')
+            print('samtools sorting '+str(group)+'_DNA-'+str(i)+'.bam failed. Re-do')
             ### py3
             os.system('samtools sort -@ '+str(num_threads)+' -o '+str(group)+'_DNA-'+str(i)+'_sorted.bam '+str(group)+'_DNA-'+str(i)+'.bam' )        
         f_coverage_matrix.write(str(group)+'_'+assembly+'_coverage_list_DNA-'+str(i)+'.txt'+'\n')

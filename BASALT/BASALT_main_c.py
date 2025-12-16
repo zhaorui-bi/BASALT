@@ -27,7 +27,9 @@ def BASALT_main_c(assembly_list, datasets, num_threads, lr_list, hifi_list, hic_
 
     #### Check existence of models
     user_dir = os.path.expanduser('~')
-    local_dir = f"{user_dir}/.cache/BASALT"
+    # local_dir = f"{user_dir}/.cache/BASALT"
+    BASALT_WEIGHT = os.environ.get("BASALT_WEIGHT")
+    local_dir = BASALT_WEIGHT
     os.chdir(local_dir)
     model_list=glob(r'*_ensemble.csv')
     os.chdir(pwd)

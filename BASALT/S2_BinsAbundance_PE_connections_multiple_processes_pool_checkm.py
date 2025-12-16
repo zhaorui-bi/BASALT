@@ -72,6 +72,7 @@ def dcovrange(X):
     else:
         return '10000'
 
+    
 def CoverageMatrix(depth_file, assembly_name):
     path=os.getcwd()
 
@@ -94,6 +95,11 @@ def CoverageMatrix(depth_file, assembly_name):
         else:
             totalcov=str(line).strip().split('\t')[2]
             num=float(num_cov_groups)-2
+            # if float(num) == 0:
+            #     avgcov = 0.0
+            #     print(f"Warning: zero length/count detected for a contig in {depth_file}")
+            # else:
+            #     avgcov = round(float(totalcov)/float(num), 3)            
             avgcov=round(float(totalcov)/float(num), 3)
             cov[str(line).strip().split('\t')[0]]=str(line).strip().split('\t')[1]+'\t'+str(totalcov)+'\t'+str(avgcov)
             for i in range(2, num_cov_groups):

@@ -276,7 +276,7 @@ def outlier_predictor(depth_TNF_matrix, contigs_depth, bin_contigs, datasets, nu
             with open(str(item)+'_sorted.bam', 'r') as fh:
                 pass
         except FileNotFoundError:
-            print('Samtools sorting '+str(item)+'.bam failed. Redoing')
+            print('samtools sorting '+str(item)+'.bam failed. Redoing')
             ## py3
             os.system('samtools sort -@ '+str(num_threads)+' -o '+str(item)+'_sorted.bam '+str(item)+'.bam')
         os.system('rm '+str(item)+'.sam')

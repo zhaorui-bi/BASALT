@@ -289,7 +289,7 @@ def outlier_predictor(depth_TNF_matrix, contigs_depth, bin_contigs, datasets, lr
                 with open(str(item)+'_sorted.bam', 'r') as fh:
                     pass
             except FileNotFoundError:
-                print('Samtools sorting '+str(item)+'.bam failed. Redoing')
+                print('samtools sorting '+str(item)+'.bam failed. Redoing')
                 # py3
                 os.system('samtools sort -@ '+str(num_threads)+' -o '+str(item)+'_sorted.bam '+str(item)+'.bam')
             os.system('rm '+str(item)+'.sam')
@@ -325,7 +325,7 @@ def outlier_predictor(depth_TNF_matrix, contigs_depth, bin_contigs, datasets, lr
                     with open('hifi'+str(i)+'_sorted.bam', 'r') as fh:
                         pass
                 except FileNotFoundError:
-                    print('Samtools sorting hifi'+str(i)+'.bam failed. Redoing')
+                    print('samtools sorting hifi'+str(i)+'.bam failed. Redoing')
                     ### py3
                     os.system('samtools sort -@ '+str(num_threads)+' -o hifi'+str(i)+'_sorted.bam hifi'+str(i)+'.bam' )
             
@@ -355,7 +355,7 @@ def outlier_predictor(depth_TNF_matrix, contigs_depth, bin_contigs, datasets, lr
                     with open('lr'+str(i)+'_sorted.bam', 'r') as fh:
                         pass
                 except FileNotFoundError:
-                    print('Samtools sorting lr'+str(i)+'.bam failed. Redoing')
+                    print('samtools sorting lr'+str(i)+'.bam failed. Redoing')
                     ### py3
                     os.system('samtools sort -@ '+str(num_threads)+' -o lr'+str(i)+'_sorted.bam lr'+str(i)+'.bam' )
             
