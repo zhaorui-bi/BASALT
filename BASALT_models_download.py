@@ -33,7 +33,8 @@ def download_model(local_dir=None):
 if __name__ =='__main__':
     download_model()
     user_dir = os.path.expanduser('~')
-    destination_folder = f"{user_dir}/.cache"
+    current_path = os.getcwd()
+    destination_folder = f"current_path"
     source_file = destination_folder+"/BASALT.zip"
 
     # os.system unzip 
