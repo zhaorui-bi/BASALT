@@ -45,7 +45,7 @@ For any issue compiling and running BASALT, as well as bug report, please do not
 
   	Java (>=1.7)
 
-  	Binning tools: MetaBAT2, Maxbin2, CONCOCT, Semibin2, Metabinner
+  	Binning tools: MetaBAT2, Maxbin2, CONCOCT, Semibin2, LorBin
 
   	Note: VAMB was used to be implemented in BASALT, but due to the conflict of environment and unsatisfactory performance on environmental datasets, we temporarily removed VAMB from BASALT environment. However, bins generated using VAMB can still be imported to BASALT directly for post-binning refinements.
 
@@ -59,7 +59,7 @@ For any issue compiling and running BASALT, as well as bug report, please do not
 
 
 
-## ⏬ INSTALLATION
+## ⏬ BASALT v1.2.0 INSTALLATION
 1. BASALT 1.2.0 installation
 
    Please refer to the installation guide of BASALT v1.2.0:
@@ -95,9 +95,9 @@ For any issue compiling and running BASALT, as well as bug report, please do not
    source ~/.bashrc
    ```
 
+## ⏬ BASALT v1.1.0 INSTALLATION
 
-
-1.	Quick installation
+1.	Quick installation 
    
   	Download BASALT_setup.py and run:
    ```
