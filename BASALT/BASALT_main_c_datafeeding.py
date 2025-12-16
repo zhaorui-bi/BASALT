@@ -13,7 +13,9 @@ from Cleanup import *
 def data_feeding_main(assembly_list, datasets, num_threads, data_feeding_folder, pwd, QC_software, output_folder, binsetindex, continue_mode):
     #### Check existence of models
     user_dir = os.path.expanduser('~')
-    local_dir = f"{user_dir}/.cache/BASALT"
+    # local_dir = f"{user_dir}/.cache/BASALT"
+    BASALT_WEIGHT = os.environ.get("BASALT_WEIGHT")
+    local_dir = BASALT_WEIGHT
     os.chdir(local_dir)
     model_list=glob(r'*_ensemble.csv')
     os.chdir(pwd)

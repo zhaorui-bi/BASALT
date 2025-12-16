@@ -18,7 +18,9 @@ from tqdm import tqdm
 def download_model(url, local_dir=None):
     if local_dir is None:
         user_dir = os.path.expanduser('~')
-        local_dir = f"{user_dir}/.cache/BASALT"
+        # local_dir = f"{user_dir}/.cache/BASALT"
+        BASALT_WEIGHT = os.environ.get("BASALT_WEIGHT")
+        local_dir = BASALT_WEIGHT
     local_path = f"{local_dir}/{os.path.basename(url)}"  # 指定本地保存路径和文件名
 
     if os.path.exists(local_path):

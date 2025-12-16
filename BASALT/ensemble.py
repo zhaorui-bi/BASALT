@@ -24,8 +24,8 @@ from utils import train_one_epoch, evaluate_ensemble, get_log_dir, del_best_ckpt
 
 def main(args):
     op=opt.output
-    # device = torch.device(args.device if torch.cuda.is_available() else "cpu")
-    device = torch.device("cpu")
+    device = torch.device(args.device if torch.cuda.is_available() else "cpu")
+    # device = torch.device("cpu")
 
     dataset = MyDataSet_test(type=args.norm_type, use_256=args.use_256, fea=args.fea, split='test', dec=args.dec)
 
@@ -42,7 +42,9 @@ def main(args):
     ensemble_dict = {5: '5_92_76_ensemble', 4: '4_90_71_ensemble', 3: '3_89_70_ensemble',
                      2: '2_89_70_ensemble', 1: '1_89_69_ensemble'}
     if not args.ckpt_dir:
-        args.ckpt_dir = f"{os.path.expanduser('~')}/.cache/BASALT"
+        # args.ckpt_dir = f"{os.path.expanduser('~')}/.cache/BASALT"
+        BASALT_WEIGHT = os.environ.get("BASALT_WEIGHT")
+        args.ckpt_dir = BASALT_WEIGHT
     try:
         ckpts = np.loadtxt(join(args.ckpt_dir, ensemble_dict[dataset.n_col]+'.csv'), dtype=str)
     except Exception as e:
@@ -63,7 +65,7 @@ def main(args):
                                device=device)
         prs.append(pr)
     prs = np.array(prs)
-    prs = (prs.sum(0) > (len(ckpts)//2 - args.mode)).astype(np.int)
+    prs = (prs.sum(0) > (len(ckpts)//2 - args.mode)).astype(int)
 
     pr = np.array(prs)
 

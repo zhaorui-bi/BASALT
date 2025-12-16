@@ -7,6 +7,7 @@ from Bio import SeqIO
 import sys, os, time, gc
 from collections import Counter
 from multiprocessing import Pool
+import shutil
 
 def fq2fa_conversion(filename): ### Converting fq to fa
     start=time.time()
@@ -249,7 +250,7 @@ def mapping_lr_o(assembly, group, datasets, num_threads, pwd, data_type):
             with open(str(group)+'_lr'+str(i)+'_sorted.bam', 'r') as fh:
                 pass
         except FileNotFoundError:
-            print('Samtools sorting '+str(group)+'_lr'+str(i)+'.bam failed. Redoing')
+            print('samtools sorting '+str(group)+'_lr'+str(i)+'.bam failed. Redoing')
             ### py3
             os.system('samtools sort -@ '+str(num_threads)+' -o '+str(group)+'_lr'+str(i)+'_sorted.bam '+str(group)+'_lr'+str(i)+'.bam' )
     
@@ -287,7 +288,7 @@ def mapping_hifi_split(assembly, group, long_read_split_fa, num_threads, pwd):
             with open(str(group)+'_LR-'+str(i)+'-bw2_sorted.bam', 'r') as fh:
                 pass
         except FileNotFoundError:
-            print('Samtools sorting '+str(group)+'_LR-'+str(i)+'-bw2.bam failed. Re doing')
+            print('samtools sorting '+str(group)+'_LR-'+str(i)+'-bw2.bam failed. Re doing')
             ### py3
             os.system('samtools sort -@ '+str(num_threads)+' -o '+str(group)+'_LR-'+str(i)+'-bw2_sorted.bam '+str(group)+'_LR-'+str(i)+'-bw2.bam' )
         os.system('rm '+str(group)+'_LR-'+str(i)+'-bw2.bam')
@@ -330,7 +331,7 @@ def mapping_hifi_minimap(assembly, group, long_read_split_fa, num_threads, pwd):
             with open(str(group)+'_LR-'+str(i)+'_sorted.bam', 'r') as fh:
                 pass
         except FileNotFoundError:
-            print('Samtools sorting '+str(group)+'_LR-'+str(i)+'.bam failed. Re doing')
+            print('samtools sorting '+str(group)+'_LR-'+str(i)+'.bam failed. Re doing')
             ### py3
             os.system('samtools sort -@ '+str(num_threads)+' -o '+str(group)+'_LR-'+str(i)+'_sorted.bam '+str(group)+'_LR-'+str(i)+'.bam' )
         
@@ -416,7 +417,7 @@ def mapping(assembly, group, datasets, num_threads, pwd):
             with open(str(group)+'_DNA-'+str(i)+'_sorted.bam', 'r') as fh:
                 pass
         except FileNotFoundError:
-            print('Samtools sorting '+str(group)+'_DNA-'+str(i)+'.bam failed. Re doing')
+            print('samtools sorting '+str(group)+'_DNA-'+str(i)+'.bam failed. Re doing')
             ### py3
             logfile.write(str('Command: samtools sort -@ '+str(num_threads)+' -o '+str(group)+'_DNA-'+str(i)+'_sorted.bam '+str(group)+'_DNA-'+str(i)+'.bam')+'\n')
             os.system('samtools sort -@ '+str(num_threads)+' -o '+str(group)+'_DNA-'+str(i)+'_sorted.bam '+str(group)+'_DNA-'+str(i)+'.bam' )
@@ -592,6 +593,68 @@ def concoct(assembly_file, pwd, depth_file, threshold, num_threads):
     except:
         xyo=0
 
+
+def lorbin(assembly_file, pwd, bam_sorted, num_threads):
+    """
+    LorBin autobinner：
+      - assembly_file: 在 autobinners 里传入的组装文件名，比如 '1_assembly.fasta'
+      - bam_sorted   : 字符串，多个 BAM 用空格分隔，比如 '1_DNA-1_sorted.bam 1_DNA-2_sorted.bam'
+      - pwd          : 工作目录
+
+    这里只负责跑 LorBin + 规范化输出，不做 checkm/checkm2，
+    和 metabat/maxbin2/concoct 的风格一致。
+    """
+    os.chdir(pwd)
+    lorbin_genome = str(assembly_file) + '_100_LorBin_genomes'
+
+    # 输出目录
+    # os.system('mkdir -p '+str(lorbin_genome))
+
+    # BAM 的绝对路径
+    bam_list = str(bam_sorted).split()
+    bam_abs_list = [os.path.join(pwd, b) for b in bam_list]
+    bam_abs = ' '.join(bam_abs_list)
+
+    # 多样本时加 --multi
+    multi_flag = ''
+    if len(bam_list) > 1:
+        multi_flag = ' --multi'
+
+    cmd = (
+        'LorBin bin'
+        ' -o ' + lorbin_genome +
+        ' -fa ' + str(assembly_file) +
+        ' -b ' + bam_abs +
+        '--num_process'+ num_threads + 
+        multi_flag
+    )
+
+    print('Starting LorBin autobinner')
+    print(cmd)
+    os.system(cmd)
+    print('LorBin binning finished for ' + lorbin_genome)
+
+    # 规范化 bin 文件名为： <assembly_file>_100_LorBin_genomes.N.fa
+    bin_index = 0
+    outdir = os.path.join(pwd, lorbin_genome)
+    for root, dirs, files in os.walk(outdir):
+        for file in files:
+            if file.endswith('.fa') or file.endswith('.fna') or file.endswith('.fasta'):
+                bin_index += 1
+                old_path = os.path.join(root, file)
+                new_name = lorbin_genome + '.' + str(bin_index) + '.fa'
+                new_path = os.path.join(outdir, new_name)
+                if old_path != new_path:
+                    os.system('mv ' + old_path + ' ' + new_path)
+
+    # trash_dir = os.path.join(outdir, 'output_bins')
+    # shutil.rmtree(trash_dir)  # 递归删除文件夹及其内容
+    # 跟其他 autobinner 一样做长度过滤
+    bin_filtration(lorbin_genome, pwd)
+
+    return lorbin_genome
+
+
 def checkm_mul(num_threads, binset, binset_checkm_folder, checkm_done_f):
     if binset_checkm_folder not in checkm_done_f.keys():
         print('CheckM processing folder: '+str(binset))
@@ -613,7 +676,7 @@ def checkm_mul(num_threads, binset, binset_checkm_folder, checkm_done_f):
     else:
         print('Checkm of '+str(binset_checkm_folder)+' already been done in last run.')
 
-def autobinners(softwares, assembly_file, depth_file, depth_file_list, Coverage_list_file, sensitive, binning_ds, checkm_done_f, QC, num_threads, ram):
+def autobinners(softwares, assembly_file, depth_file, depth_file_list, Coverage_list_file, sensitive, binning_ds, checkm_done_f, QC, num_threads, ram, bam_sorted):
     pwd=os.getcwd()
     os.chdir(pwd)
 
@@ -639,6 +702,33 @@ def autobinners(softwares, assembly_file, depth_file, depth_file_list, Coverage_
         # maxbin2_threshold=[0.9]
         # metabat_threshold=[200]
         binset_checkm={}
+
+        # lorbin_genome = str(assembly_file) + '_100_LorBin_genomes'
+        # lorbin_checkm = str(assembly_file) + '_100_LorBin_checkm'
+        # genome_folders.append(lorbin_genome)
+
+        # 只在没跑过且有 BAM 的情况下跑
+        # if lorbin_genome not in binning_ds.keys():
+        #     if bam_sorted is None or str(bam_sorted).strip() == '':
+        #         print('Warning: LorBin is enabled but bam_sorted is empty. Skip LorBin.')
+        #     else:
+        #         print('Running LorBin as the first autobinner')
+        #         lorbin(assembly_file, pwd, bam_sorted,num_threads)
+
+        #         # 记录到 checkpoint / log，和其他 binner 一致
+        #         f = open('Autobinner_checkpoint.txt','a')
+        #         f.write('Binning: ' + str(lorbin_genome) + '\n')
+        #         f.close()
+        #         fb = open('Basalt_log.txt','a')
+        #         fb.write('Binning: ' + str(lorbin_genome) + '\n')
+        #         fb.close()
+
+        #         binning_ds[lorbin_genome] = ''
+        # else:
+        #     print('LorBin binning ' + str(lorbin_genome) + ' already done in last run.')
+
+        # # 放进 binset_checkm，等后面统一跑 checkm/checkm2
+        # binset_checkm[lorbin_genome] = lorbin_checkm
 
         ### maxbin2
         if sensitive == 'more-sensitive':
@@ -830,9 +920,9 @@ def autobinners(softwares, assembly_file, depth_file, depth_file_list, Coverage_
         except:
             xyo=0
 
-        print('Running checkm with binsets gernerated from maxbin2, metabat and concoct')
+        print('Running checkm with binsets gernerated from autobinner')
         fb=open('Basalt_log.txt','a')
-        fb.write('Running checkm with binsets gernerated from maxbin2, metabat and concoct'+'\n')
+        fb.write('Running checkm with binsets gernerated from autobinner'+'\n')
         fb.close()
 
         ### checkm2
@@ -845,7 +935,7 @@ def autobinners(softwares, assembly_file, depth_file, depth_file_list, Coverage_
                     os.system('checkm lineage_wf -t '+str(num_threads)+' -x fasta '+str(binset)+' '+str(binset_checkm[binset]))
 
                 # os.system('checkm lineage_wf -t '+str(num_threads)+' -x fa '+str(metabat_genome)+' '+str(metabat_checkm))
-            elif 'metabat' in str(binset):
+            elif 'metabat' in str(binset):                
                 if QC == 'checkm2':
                     os.system('checkm2 predict -t '+str(num_threads)+' -i '+str(binset)+' -x fa -o '+str(binset_checkm[binset]))
                 elif QC == 'checkm':
@@ -1221,11 +1311,29 @@ def autobinner_main(assembly_list, datasets, lr, hifi_list, insert_size, num_thr
                     bam_sorted=bam_sorted1+' '+bam_sorted2
                     
             ### metabat etc.
+            # Coverage_list_file='Coverage_list_'+str(int(item)+1)+'_'+str(assembly_list[item])+'.txt'
+            # bins_folders[str(assembly_list[item])]=autobinners('all', mo_assembly, mo_assembly_depth, depth_file_list, Coverage_list_file, sensitive, binning_ds, checkm_done_f, QC, num_threads, ram)
+            # os.system('rm Coverage_list_*')
+            # bam_sorted = 
+            ### metabat / maxbin2 / concoct 
             Coverage_list_file='Coverage_list_'+str(int(item)+1)+'_'+str(assembly_list[item])+'.txt'
-            bins_folders[str(assembly_list[item])]=autobinners('all', mo_assembly, mo_assembly_depth, depth_file_list, Coverage_list_file, sensitive, binning_ds, checkm_done_f, QC, num_threads, ram)
+            bins_folders[str(assembly_list[item])] = autobinners(
+                'all',
+                mo_assembly,
+                mo_assembly_depth,
+                depth_file_list,
+                Coverage_list_file,
+                sensitive,
+                binning_ds,
+                checkm_done_f,
+                QC,
+                num_threads,
+                ram,
+                bam_sorted1  
+            )
             os.system('rm Coverage_list_*')
 
-            ### SemiBin2
+            # ### SemiBin2
             print('Performing Semibin2')
             # if len(depth_file_list) == 1:
             semibin2_list=[]
@@ -1291,7 +1399,8 @@ def autobinner_main(assembly_list, datasets, lr, hifi_list, insert_size, num_thr
                     bins_folders[str(assembly_list[item])]=[]
                     bins_folders[str(assembly_list[item])].append(str(group)+'_'+assembly+'_'+str(xyz)+'_semibin_genomes')
 
-            ### Collecting single contig bin
+            # Collecting single contig bin
+            
             os.system('mkdir '+str(group)+'_'+assembly+'_1_SingleContig_genomes')
             f2=open('Potential_bins.txt','w')
             p_b, n, y={}, 0, 0
@@ -1343,7 +1452,7 @@ if __name__ == '__main__':
     datasets={}
     # datasets={'1':['SRR10988543_1.fastq','SRR10988543_2.fastq']}
     lr_list=[]
-    hifi_list=['SRR15214153.fastq', 'SRR201115218.fastq','SRR20115229.fastq'] ### put all the long reads into this list, including ont, pb dataset, hifi dataset etc.
+    hifi_list=['sample1.R1.fq', 'sample1.R2.fq'] ### put all the long reads into this list, including ont, pb dataset, hifi dataset etc.
     insert_size=100
     QC='checkm2' ### checkm2 or checkm
     # lr=['SRR15275210.fastq', 'SRR15275211.fastq', 'SRR15275212.fastq', 'SRR15275213.fastq', 'SRR17687125.fastq']
