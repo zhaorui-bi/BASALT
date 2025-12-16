@@ -73,7 +73,6 @@ For any issue compiling and running BASALT, as well as bug report, please do not
    conda activate basalt_env
 
    uv pip install tensorflow torch torchvision tensorboard tensorboardx \     lightgbm scikit-learn numpy scipy pandas matplotlib \     cython biolib joblib tqdm requests checkm-genome
-
    ```
    
    Download BASALT script files and change permission:
@@ -83,7 +82,6 @@ For any issue compiling and running BASALT, as well as bug report, please do not
    bash install.sh
 
    chomod +x /path/to/basalt/bin/*
-
    ```
 
    Set environment variables by adding the following lines to your ~/.bashrc file:
@@ -103,7 +101,7 @@ For any issue compiling and running BASALT, as well as bug report, please do not
    
   	Download BASALT_setup.py and run:
    ```
-   python BASALT_setup.py
+   	python BASALT_setup.py
    ```
    Please remain patient, as the installation process may take an extended period.
 
