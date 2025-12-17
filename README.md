@@ -174,6 +174,9 @@ For any issue compiling and running BASALT, as well as bug report, please do not
    ```
 
    Download the trained models for neural networks 'BASALT.zip' from FigShare:
+
+   > You can also find the BASALT v1.1.0 version BASALT.zip file the previous released version and download it
+   
    ```
    wget https://figshare.com/ndownloader/files/41093033
    mv 41093033 BASALT.zip
@@ -188,7 +191,7 @@ For any issue compiling and running BASALT, as well as bug report, please do not
    unzip BASALT.zip
    ```
 
-4. Another way to install BASALT in China mainland 以singularity的方式加载BASALT的sif镜像
+5. Another way to install BASALT in China mainland 以singularity的方式加载BASALT的sif镜像
 
    使用BASALT,可通过微云的以下网址获得BASALT.sif镜像文件
    ```
