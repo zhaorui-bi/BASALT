@@ -6,8 +6,7 @@ copyright: "Copyright &copy; PKU EMBL Lab 2025"
 nav:
   - Index: index.md
   - Prerequisites: Prerequisites_guild.md
-  - Lecture1: lecture1.md
-  - Lecture2: lecture2.md
+  - Tutorial: tutorial.md
   - Release notes: Release_notes.md
   # - Developer guild: Developer_guild.md
 
