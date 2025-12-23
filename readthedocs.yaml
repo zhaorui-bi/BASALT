@@ -16,7 +16,7 @@ build:
     # golang: "1.17"
 
 mkdocs:
-  configuration: DVAM_Guide/mkdocs.yml
+  configuration: BASALT_Guide/mkdocs.yml
 # If using Sphinx, optionally build your docs in additional formats such as PDF
 # formats:
 #    - pdf
