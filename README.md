@@ -78,7 +78,7 @@ For any issue compiling and running BASALT, as well as bug report, please do not
 	Download BASALT Deep Learning Model Weight
    ```
     # please chanage the download path according to your computer 
-	python BASALT_models_download.py
+	python BASALT_models_download.py --path "my_model_folder"
    ```
    
    Download BASALT script files and change permission:
