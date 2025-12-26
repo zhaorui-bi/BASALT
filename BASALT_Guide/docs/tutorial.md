@@ -14,12 +14,15 @@
    conda activate basalt_env
 
    uv pip install tensorflow torch torchvision tensorboard tensorboardx \     lightgbm scikit-learn numpy scipy pandas matplotlib \     cython biolib joblib tqdm requests checkm-genome
+   
    ```
-
 	Download BASALT Deep Learning Model Weight
+	please chanage the download path according to your computer
+
    ```
-    # please chanage the download path according to your computer 
+   
 	python BASALT_models_download.py --path "my_model_folder"
+   
    ```
    
    Download BASALT script files and change permission:
