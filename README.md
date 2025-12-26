@@ -72,7 +72,8 @@ For any issue compiling and running BASALT, as well as bug report, please do not
 
    conda activate basalt_env
 
-   uv pip install tensorflow torch torchvision tensorboard tensorboardx \     lightgbm scikit-learn numpy scipy pandas matplotlib \     cython biolib joblib tqdm requests checkm-genome
+   uv pip install tensorflow torch torchvision tensorboard tensorboardx \     lightgbm scikit-learn numpy==1.26.4 python-igr
+aph scipy pandas matplotlib \     cython biolib joblib tqdm requests checkm-genome
    ```
 
 	Download BASALT Deep Learning Model Weight
