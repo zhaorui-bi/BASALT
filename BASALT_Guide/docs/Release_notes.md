@@ -10,4 +10,7 @@
 
 - [2024/06/12]:🤗 We release BASALT V1.1.0 under MIT LICENSE.
 
+- [2024/03/11]:🤗 **BASALT refines binning from metagenomic data and increases resolution of genome-resolved metagenomic analysis** is publised on [Nature Communications](https://www.nature.com/articles/s41467-024-46539-7).
+
+
 -  [2023/8/18]:🤗 We release BASALT V1.0.0 under MIT LICENSE.
