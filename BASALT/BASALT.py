@@ -26,7 +26,7 @@ parser.add_argument('-e','--extra_binner', type=str, dest='extra_binner',
 parser.add_argument('-o','--out', type=str, dest='output_folder_name', default='Final_binset',
                     help='Name of the output folder. For binning, E.g. -o Anammox. BASALT would put those bins into folder Anammox_final_binset; for data feeding, e.g. -o Anammox; output files will under the folder of Anammox_data_feeded')
 parser.add_argument('-q','--quality-check', type=str, dest='quality_check', default='checkm2', 
-                    help='Chance checkm version, default: checkm; you may use: \'-q checkm2\' to specify checkm for quality check when running BASALT')
+                    help='Chance checkm version, default: checkm2; you may use: \'-q checkm\' to specify checkm for quality check when running BASALT')
 parser.add_argument('--min-cpn', type=int, dest='Min_completeness', default=35,
                     help='Min completeness of kept bins (default: 35)')
 parser.add_argument('--max-ctn', type=int, dest='Max_contamination', default=20,
@@ -268,4 +268,5 @@ else:
                 else:
                     output_folder='Data_feeded'
                 pe='y'
+
                 data_feeding(data_feeding_folder, datasets, binsetindex, num_threads, output_folder, QC_software, pe)
