@@ -73,16 +73,18 @@ For any issue compiling and running BASALT, as well as bug report, please do not
    conda activate basalt_env
 
    uv pip install tensorflow torch torchvision tensorboard tensorboardx \     lightgbm scikit-learn numpy==1.26.4 python-igr
-aph scipy pandas matplotlib \     cython biolib joblib tqdm requests checkm-genome
+   aph scipy pandas matplotlib \     cython biolib joblib tqdm requests checkm-genome
    ```
 
-	Download BASALT Deep Learning Model Weight
+	Download BASALT Deep Learning Model Weights:
    ```
-    # please chanage the download path according to your computer 
+    # please chanage the download path according to your computer environment
+    
 	python BASALT_models_download.py --path "my_model_folder"
    ```
    
    Download BASALT script files and change permission:
+
    ```
    chmod +x install.sh
 
@@ -108,7 +110,7 @@ aph scipy pandas matplotlib \     cython biolib joblib tqdm requests checkm-geno
    
   	Download BASALT_setup.py and run:
    ```
-   	python BASALT_setup.py
+   python BASALT_setup.py
    ```
    Please remain patient, as the installation process may take an extended period.
 
