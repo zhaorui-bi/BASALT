@@ -22,7 +22,7 @@ parser.add_argument('-t','--threads', type=int, dest='threads', default=4,
 parser.add_argument('-m','--ram', type=int, dest='ram', default=32,
                     help='Number of ram, minimum ram suggested: 32G')
 parser.add_argument('-e','--extra_binner', type=str, dest='extra_binner',
-                    help='Extra binner for binning: m: metabinner, v: vamb; for instance: -e m, means BASALT will use metabinner for binning besides metabat2, maxbin2, and concoct')
+                    help='Extra binner for binning: m: metabinner, v: vamb, l: lorbin; for instance: -e m, means BASALT will use metabinner for binning besides metabat2, maxbin2, and concoct')
 parser.add_argument('-o','--out', type=str, dest='output_folder_name', default='Final_binset',
                     help='Name of the output folder. For binning, E.g. -o Anammox. BASALT would put those bins into folder Anammox_final_binset; for data feeding, e.g. -o Anammox; output files will under the folder of Anammox_data_feeded')
 parser.add_argument('-q','--quality-check', type=str, dest='quality_check', default='checkm2', 
@@ -270,3 +270,4 @@ else:
                 pe='y'
 
                 data_feeding(data_feeding_folder, datasets, binsetindex, num_threads, output_folder, QC_software, pe)
+
