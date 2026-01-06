@@ -103,6 +103,9 @@ For any issue compiling and running BASALT, as well as bug report, please do not
 
    source ~/.bashrc
    ```
+   The below Google Drive link provide the essential files for checkm_db, checkm2_db and newest singularity image.
+   
+   https://drive.google.com/drive/folders/1d0e_2FpYRBAZLwKXl8fA-yDK4b5PBA_E?usp=sharing
 
 ## ⏬ BASALT v1.1.0 INSTALLATION
 
