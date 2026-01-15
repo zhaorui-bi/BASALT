@@ -18,10 +18,12 @@
    ```
 
 	Download BASALT Deep Learning Model Weights:
+
    ```
     # please chanage the download path according to your computer environment
     
 	python BASALT_models_download.py --path "my_model_folder"
+   
    ```
    
    Download BASALT script files and change permission:
