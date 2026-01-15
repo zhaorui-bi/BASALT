@@ -14,25 +14,24 @@
    conda activate basalt_env
 
    uv pip install tensorflow torch torchvision tensorboard tensorboardx \     lightgbm scikit-learn numpy==1.26.4 python-igr
-aph scipy pandas matplotlib \     cython biolib joblib tqdm requests checkm-genome
-   
+   aph scipy pandas matplotlib \     cython biolib joblib tqdm requests checkm-genome
    ```
-	Download BASALT Deep Learning Model Weight
-	please chanage the download path according to your computer
 
+	Download BASALT Deep Learning Model Weights:
    ```
-   
+    # please chanage the download path according to your computer environment
+    
 	python BASALT_models_download.py --path "my_model_folder"
-   
    ```
    
    Download BASALT script files and change permission:
+
    ```
    chmod +x install.sh
 
    bash install.sh
 
-   chomod +x /path/to/basalt/bin/*
+   chmod +x /path/to/basalt/bin/*
    ```
 
    Set environment variables by adding the following lines to your ~/.bashrc file:
@@ -45,6 +44,9 @@ aph scipy pandas matplotlib \     cython biolib joblib tqdm requests checkm-geno
 
    source ~/.bashrc
    ```
+   The below Google Drive link provide the essential files for checkm_db, checkm2_db and newest singularity image.
+   
+   https://drive.google.com/drive/folders/1d0e_2FpYRBAZLwKXl8fA-yDK4b5PBA_E?usp=sharing
 
 ## ⏬ BASALT v1.1.0 INSTALLATION
 
