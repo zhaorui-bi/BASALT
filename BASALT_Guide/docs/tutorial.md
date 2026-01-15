@@ -17,13 +17,12 @@
    aph scipy pandas matplotlib \     cython biolib joblib tqdm requests checkm-genome
    ```
 
-	Download BASALT Deep Learning Model Weights:
+   Download BASALT Deep Learning Model Weights:
 
    ```
-    # please chanage the download path according to your computer environment
+   # please chanage the download path according to your computer environment
     
-	python BASALT_models_download.py --path "my_model_folder"
-   
+   python BASALT_models_download.py --path "my_model_folder"
    ```
    
    Download BASALT script files and change permission:
@@ -54,9 +53,9 @@
 
 1.	Quick installation 
    
-  	Download BASALT_setup.py and run:
+   Download BASALT_setup.py and run:
    ```
-   	python BASALT_setup.py
+   python BASALT_setup.py
    ```
    Please remain patient, as the installation process may take an extended period.
 
