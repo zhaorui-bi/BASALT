@@ -90,7 +90,7 @@ For any issue compiling and running BASALT, as well as bug report, please do not
 
    bash install.sh
 
-   chomod +x /path/to/basalt/bin/*
+   chmod +x /path/to/basalt/bin/*
    ```
 
    Set environment variables by adding the following lines to your ~/.bashrc file:
