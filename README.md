@@ -109,7 +109,7 @@ For any issue compiling and running BASALT, as well as bug report, please do not
    https://drive.google.com/drive/folders/1d0e_2FpYRBAZLwKXl8fA-yDK4b5PBA_E?usp=sharing
    ```
 
-   Another way to install BASALT in China mainland 以singularity的方式加载BASALT的sif镜像
+   ⚠️: **Another way** to install BASALT in China mainland 以singularity的方式加载BASALT的sif镜像
       
    将BASALT的singularity镜像（basalt.sif）放置在服务器的home目录下。以执行singularity的命令运行，如
    ```
